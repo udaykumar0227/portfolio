@@ -470,39 +470,40 @@
     );
   }
 
-  /* ---------- remove Built with Spline watermark ---------- */
+  /* ---------- safely hide Built with Spline watermark without breaking WebGL ---------- */
 
   const cleanSplineLogo = () => {
     const viewer = document.querySelector("spline-viewer");
     if (!viewer) return;
 
-    const checkAndRemove = () => {
-      if (viewer.shadowRoot) {
-        const logo =
-          viewer.shadowRoot.querySelector("#logo") ||
-          viewer.shadowRoot.querySelector("a[href*='spline.design']") ||
-          viewer.shadowRoot.querySelector("a");
-        if (logo) {
-          logo.remove();
-          return true;
-        }
+    const hideBadge = () => {
+      if (!viewer.shadowRoot) return false;
+      const logo =
+        viewer.shadowRoot.querySelector("#logo") ||
+        viewer.shadowRoot.querySelector("a[href*='spline.design']");
+      if (logo) {
+        logo.style.setProperty("opacity", "0", "important");
+        logo.style.setProperty("pointer-events", "none", "important");
+        logo.style.setProperty("visibility", "hidden", "important");
+        logo.style.setProperty("position", "absolute", "important");
+        logo.style.setProperty("bottom", "-9999px", "important");
+        logo.style.setProperty("transform", "scale(0)", "important");
+        return true;
       }
       return false;
     };
 
-    if (!checkAndRemove()) {
+    if (!hideBadge()) {
       const interval = setInterval(() => {
-        if (checkAndRemove()) {
-          clearInterval(interval);
-        }
+        if (hideBadge()) clearInterval(interval);
       }, 50);
 
       viewer.addEventListener("load-complete", () => {
-        checkAndRemove();
+        hideBadge();
         clearInterval(interval);
       });
 
-      setTimeout(() => clearInterval(interval), 8000);
+      setTimeout(() => clearInterval(interval), 10000);
     }
   };
 
