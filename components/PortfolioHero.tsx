@@ -3,6 +3,7 @@
 import { SplineScene } from "@/components/ui/splite"
 import { Card } from "@/components/ui/card"
 import { Spotlight } from "@/components/ui/spotlight"
+import { ButtonWithIcon } from "@/components/ui/button-with-icon"
 
 export function PortfolioHero() {
   return (
@@ -33,15 +34,10 @@ export function PortfolioHero() {
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
-            <a
-              href="#contact"
-              className="px-6 py-3 rounded-lg bg-white text-black font-semibold text-sm hover:bg-neutral-200 transition"
-            >
-              Get in touch &rarr;
-            </a>
+            <ButtonWithIcon text="Get in touch" href="#contact" />
             <a
               href="#services"
-              className="px-6 py-3 rounded-lg bg-white/5 border border-white/10 text-white font-medium text-sm hover:bg-white/10 transition"
+              className="px-6 py-3 rounded-full bg-white/5 border border-white/10 text-white font-medium text-sm hover:bg-white/10 transition"
             >
               Explore work &amp; skills
             </a>
