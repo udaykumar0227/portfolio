@@ -20,9 +20,11 @@
   <link rel="preload" href="assets/fonts/space-grotesk-var-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="assets/fonts/instrument-serif-italic-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="styles.css" />
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.72/build/spline-viewer.js"></script>
   <script src="script.js" defer></script>
 </head>
 <body>
+  <canvas id="neural-noise-canvas" class="neural-noise-canvas" aria-hidden="true"></canvas>
   <a class="skip-link" href="#main">Skip to content</a>
 
   <div class="progress" aria-hidden="true"></div>
@@ -52,6 +54,7 @@
 
   <main id="main">
     <section class="hero" id="top">
+      <div class="spotlight" aria-hidden="true"></div>
       <div class="hero__grid">
         <div class="hero__copy">
           <p class="eyebrow">
@@ -60,7 +63,7 @@
           </p>
 
           <h1 class="hero__title">
-            <span class="hero__line">Gudla</span>
+            <span class="hero__line bg-gradient-text">Gudla</span>
             <span class="hero__line hero__line--outline">Uday Kumar</span>
           </h1>
 
@@ -86,22 +89,12 @@
           </ul>
         </div>
 
-        <div class="hero__art" aria-hidden="true">
-          <div class="blob"></div>
-          <svg class="hero__star" viewBox="0 0 200 200">
-            <path d="M100 8c7 52 33 78 85 85-52 7-78 33-85 85-7-52-33-78-85-85 52-7 78-33 85-85Z" fill="currentColor"/>
-          </svg>
-          <div class="sticker">
-            <svg viewBox="0 0 200 200">
-              <defs>
-                <path id="stickerPath" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0" />
-              </defs>
-              <text>
-                <textPath href="#stickerPath">OPEN FOR WORK &#10022; OPEN FOR WORK &#10022; OPEN FOR WORK &#10022; </textPath>
-              </text>
-            </svg>
-            <span class="sticker__star">&#10023;</span>
-          </div>
+        <div class="hero__art hero__spline-wrap" aria-label="Interactive 3D Spline Scene">
+          <spline-viewer
+            url="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+            loading-anim-type="spinner-small-dark"
+            class="hero__spline"
+          ></spline-viewer>
         </div>
       </div>
 
