@@ -469,4 +469,42 @@
       { passive: true }
     );
   }
+
+  /* ---------- remove Built with Spline watermark ---------- */
+
+  const cleanSplineLogo = () => {
+    const viewer = document.querySelector("spline-viewer");
+    if (!viewer) return;
+
+    const checkAndRemove = () => {
+      if (viewer.shadowRoot) {
+        const logo =
+          viewer.shadowRoot.querySelector("#logo") ||
+          viewer.shadowRoot.querySelector("a[href*='spline.design']") ||
+          viewer.shadowRoot.querySelector("a");
+        if (logo) {
+          logo.remove();
+          return true;
+        }
+      }
+      return false;
+    };
+
+    if (!checkAndRemove()) {
+      const interval = setInterval(() => {
+        if (checkAndRemove()) {
+          clearInterval(interval);
+        }
+      }, 50);
+
+      viewer.addEventListener("load-complete", () => {
+        checkAndRemove();
+        clearInterval(interval);
+      });
+
+      setTimeout(() => clearInterval(interval), 8000);
+    }
+  };
+
+  cleanSplineLogo();
 })();

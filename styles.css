@@ -637,6 +637,15 @@ body.cursor-hover .cursor {
   display: block;
 }
 
+spline-viewer::part(logo),
+spline-viewer::part(badge),
+spline-viewer #logo {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+
 .hero__art {
   position: relative;
   width: 100%;
